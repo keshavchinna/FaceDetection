@@ -28,16 +28,14 @@ public class MyActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-   ((Button) findViewById(R.id.take_picture)).setOnClickListener(btnClick);
+    ((Button) findViewById(R.id.take_picture)).setOnClickListener(btnClick);
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 
-    if (TAKE_PICTURE_CODE == requestCode && resultCode==RESULT_OK) {
-      Log.d("test","resultCode: "+resultCode);
-      Log.d("test","requestCode: "+requestCode);
+    if (TAKE_PICTURE_CODE == requestCode && resultCode == RESULT_OK) {
       processCameraImage(data);
     }
   }
@@ -85,19 +83,15 @@ public class MyActivity extends Activity {
       float eyeDistance = 0.0f;
       float confidence = 0.0f;
 
-      Log.i("FaceDetector", "Number of faces found: " + facesFound);
-
       if (facesFound > 0) {
         for (int index = 0; index < facesFound; ++index) {
           faces[index].getMidPoint(midPoint);
           eyeDistance = faces[index].eyesDistance();
           confidence = faces[index].confidence();
-
           Log.i("FaceDetector",
               "Confidence: " + confidence +
                   ", Eye distance: " + eyeDistance +
                   ", Mid Point: (" + midPoint.x + ", " + midPoint.y + ")");
-
           canvas.drawRect((int) midPoint.x - eyeDistance,
               (int) midPoint.y - eyeDistance,
               (int) midPoint.x + eyeDistance,
@@ -128,7 +122,7 @@ public class MyActivity extends Activity {
 
   @Override
   public void onBackPressed() {
-    super.onBackPressed();    //To change body of overridden methods use File | Settings | File Templates.
+    super.onBackPressed();   
     this.finish();
   }
 
